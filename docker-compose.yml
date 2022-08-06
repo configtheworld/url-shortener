@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  server:
+    image: url-shortener-server
+    build: .
+    command: "npm start"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "mongo"
+  #client:
+  #  container_name: url-shortener-client
+  mongo:
+    image: "mongo"
+    ports:
+      - 27017:27017
+    restart: unless-stopped
