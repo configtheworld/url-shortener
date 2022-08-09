@@ -1,5 +1,5 @@
 {
-  "name": "urlshortner",
+  "name": "url-shortner-server",
   "version": "1.0.0",
   "description": "Personal implementation of urlshortner with typescript express redis and vue",
   "main": "index.js",
