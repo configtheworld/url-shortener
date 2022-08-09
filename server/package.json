@@ -4,7 +4,7 @@
   "description": "Personal implementation of urlshortner with typescript express redis and vue",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node --unhandled-rejections=strict ./dist/index.js",
+    "start": "tsc",
     "debug": "export DEBUG=* && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

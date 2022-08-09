@@ -1,5 +1,11 @@
 version: "3.9"
 services:
+  client:
+    image: client
+    ports:
+      - "8081:8081"
+    depends_on:
+      - "server"
   server:
     image: url-shortener-server
     build: .
@@ -8,8 +14,6 @@ services:
       - "8080:8080"
     depends_on:
       - "mongo"
-  #client:
-  #  container_name: url-shortener-client
   mongo:
     image: "mongo"
     ports:

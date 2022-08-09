@@ -1,5 +1,6 @@
 FROM node:16-alpine3.11
 
+RUN npm install -g http-server
 # Create app directory
 WORKDIR /app
 
@@ -14,7 +15,8 @@ RUN npm install
 
 # Bundle app source
 COPY . .
-RUN npm run start
 
-EXPOSE 3000
-CMD ["node", "dist/index.js"]
+RUN npm run build
+
+EXPOSE 8080
+CMD [ "http-server", "dist" ]

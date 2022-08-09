@@ -1,4 +1,4 @@
-# url-shortener-client
+# client
 
 ## Project setup
 ```

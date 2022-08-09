@@ -14,14 +14,15 @@ const server: http.Server = http.createServer(app);
 const routes: Array<CommonRoutesConfig> = [];
 const debugLog: debug.IDebugger = debug('app');
 
-mongoose.connect('mongodb://mongo:27017/url-shortener');
+mongoose.connect('mongodb://localhost:27017/url-shortener');
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   console.log('Connected to database.');
 });
 
-app.set('port', process.env.PORT || 8080);
+const port = process.env.PORT || 3000;
+app.set('port', port);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -71,12 +72,12 @@ app.use(expressWinston.logger(loggerOptions));
 
 routes.push(new UrlRoutes(app));
 
-const runningMessage = `Server running at http://localhost:${process.env.PORT}`;
+const runningMessage = `Server running at http://localhost:${port}`;
 app.get('/', (req: express.Request, res: express.Response) => {
   res.status(200).send(runningMessage);
 });
 
-server.listen(process.env.PORT, () => {
+server.listen(port, () => {
   routes.forEach((route: CommonRoutesConfig) => {
     debugLog(`Routes configured for ${route.getName()}`);
   });
