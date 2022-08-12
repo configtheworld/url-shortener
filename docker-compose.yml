@@ -1,21 +1,24 @@
 version: "3.9"
 services:
+  url-api:
+    image: url-api
+    build:
+      context: server/.
+      dockerfile: Dockerfile
+    command: "npm start"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - "mongo"
   client:
     image: client
     ports:
-      - "8081:8081"
-    depends_on:
-      - "server"
-  server:
-    image: url-shortener-server
-    build: .
-    command: "npm start"
-    ports:
       - "8080:8080"
     depends_on:
-      - "mongo"
+      - "url-api"
+  
   mongo:
-    image: "mongo"
+    image: mongo:latest
     ports:
       - 27017:27017
     restart: unless-stopped
