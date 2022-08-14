@@ -2,10 +2,9 @@ version: "3.9"
 services:
   url-api:
     image: url-api
-    build:
-      context: server/.
-      dockerfile: Dockerfile
-    command: "npm start"
+    build: .
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/url-shortener
     ports:
       - "3000:3000"
     depends_on:
