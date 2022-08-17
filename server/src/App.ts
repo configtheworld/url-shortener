@@ -1,5 +1,5 @@
 import express, { Application } from 'express';
-
+import router from './routers/ShortenerRoute';
 class ApiApp {
   private application: Application;
 
@@ -29,7 +29,7 @@ class ApiApp {
       res.json({ message: 'Url-shortener' });
     });
 
-    // Setup our router later
+    this.application.use('/urls', router.getRouter());
   }
 }
 
