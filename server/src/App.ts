@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
 import router from './routers/ShortenerRoute';
+import cors from 'cors';
+
 class ApiApp {
   private application: Application;
 
@@ -7,6 +9,17 @@ class ApiApp {
     this.application = express();
     this.setupGlobalMiddleware();
     this.setupRouters();
+    this.cors();
+  }
+
+  cors() {
+    const allowedOrigins = ['http://localhost:8080', 'http://localhost:3000'];
+    const options: cors.CorsOptions = {
+      origin: allowedOrigins,
+      credentials: true,
+    };
+    this.application.use(cors(options));
+    this.application.use(express.json());
   }
 
   start(port: string | number = 3000) {
